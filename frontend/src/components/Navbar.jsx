@@ -19,9 +19,7 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
 
   const isActive = (path) => location.pathname === path;
 
-  const navLinks = [
-    { label: 'Home', path: '/' },
-  ];
+
 
   return (
     <nav className="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-100 dark:border-gray-800">
@@ -33,22 +31,7 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
             <span>TaskFlow</span>
           </Link>
 
-          {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-6">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={`text-sm font-medium transition-colors duration-200 ${
-                  isActive(link.path)
-                    ? 'text-primary-600'
-                    : 'text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400'
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
+
 
           {/* Right side */}
           <div className="hidden md:flex items-center gap-3">
@@ -120,18 +103,7 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
       {/* Mobile menu */}
       {menuOpen && (
         <div className="md:hidden border-t border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 px-4 py-4 space-y-3 animate-fade-in">
-          {navLinks.map((link) => (
-            <Link
-              key={link.path}
-              to={link.path}
-              onClick={() => setMenuOpen(false)}
-              className={`block text-sm font-medium py-2 transition-colors ${
-                isActive(link.path) ? 'text-primary-600' : 'text-gray-700 dark:text-gray-300'
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
+
           {isAuthenticated ? (
             <>
               <Link
