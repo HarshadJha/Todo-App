@@ -35,12 +35,14 @@ const Signup = () => {
 
     setLoading(true);
     try {
-      await api.post('/auth/register', {
+      const { data } = await api.post('/auth/register', {
         name: form.name.trim(),
         email: form.email.trim().toLowerCase(),
         password: form.password,
       });
-      toast.success('OTP sent to your email!');
+      toast.success(data.message || 'OTP sent to your email!', {
+        duration: 10000, // Leave it on screen slightly longer so they can read the OTP
+      });
       navigate('/verify-otp', { state: { email: form.email.trim().toLowerCase() } });
     } catch (err) {
       toast.error(err.response?.data?.message || 'Registration failed. Please try again.');

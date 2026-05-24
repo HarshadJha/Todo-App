@@ -80,8 +80,10 @@ const VerifyOTP = () => {
     if (!canResend) return;
     setResending(true);
     try {
-      await api.post('/auth/resend-otp', { email });
-      toast.success('New OTP sent to your email!');
+      const { data } = await api.post('/auth/resend-otp', { email });
+      toast.success(data.message || 'New OTP sent to your email!', {
+        duration: 10000,
+      });
       setCountdown(60);
       setCanResend(false);
       setOtp(['', '', '', '', '', '']);
