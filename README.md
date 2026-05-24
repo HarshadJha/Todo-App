@@ -5,10 +5,7 @@
 
 ---
 
-### 🌐 Live Deployment Links
-* **Frontend Demo (Vercel)**: [https://todo-app-jet-two-17.vercel.app](https://todo-app-jet-two-17.vercel.app)
-* **Backend API (Render)**: [https://todo-app-backend-t5hu.onrender.com](https://todo-app-backend-t5hu.onrender.com/api)
-
+### 🌐 Live Deployment Links - [https://todo-app-jet-two-17.vercel.app](https://todo-app-jet-two-17.vercel.app)
 ---
 
 ## 📋 Table of Contents
