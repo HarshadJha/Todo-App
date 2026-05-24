@@ -126,6 +126,24 @@ router.put('/:id', async (req, res) => {
 });
 
 // ─────────────────────────────────────────────
+// @route   DELETE /api/tasks/completed
+// @desc    Soft-delete all completed tasks for logged-in user
+// @access  Protected
+// ─────────────────────────────────────────────
+router.delete('/completed', async (req, res) => {
+  try {
+    await Task.updateMany(
+      { userId: req.user._id, status: 'Completed', isDeleted: false },
+      { isDeleted: true }
+    );
+    res.status(200).json({ success: true, message: 'All completed tasks cleared.' });
+  } catch (error) {
+    console.error('Clear completed tasks error:', error);
+    res.status(500).json({ success: false, message: 'Server error.' });
+  }
+});
+
+// ─────────────────────────────────────────────
 // @route   DELETE /api/tasks/:id
 // @desc    Soft-delete a task by ID
 // @access  Protected

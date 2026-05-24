@@ -304,6 +304,18 @@ const Dashboard = () => {
     }
   };
 
+  // Clear all completed tasks
+  const handleClearCompleted = async () => {
+    if (!window.confirm('Are you sure you want to clear all completed tasks?')) return;
+    try {
+      await api.delete('/tasks/completed');
+      toast.success('Completed tasks cleared.');
+      fetchTasks();
+    } catch {
+      toast.error('Failed to clear completed tasks.');
+    }
+  };
+
   // Quick status change
   const handleStatusChange = async (id, newStatus) => {
     try {
@@ -483,6 +495,16 @@ const Dashboard = () => {
               <option value="priority-asc">Priority ↑</option>
               <option value="priority-desc">Priority ↓</option>
             </select>
+
+            {summary.completed > 0 && (
+              <button
+                onClick={handleClearCompleted}
+                className="flex items-center gap-1.5 bg-red-50 hover:bg-red-100 dark:bg-red-950/20 dark:hover:bg-red-950/40 text-red-600 dark:text-red-400 font-semibold px-4 py-2.5 rounded-xl transition-colors text-sm whitespace-nowrap"
+              >
+                <Trash2 className="w-4 h-4 text-red-500" />
+                Clear Completed
+              </button>
+            )}
 
             <button
               onClick={() => setShowModal(true)}
