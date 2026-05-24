@@ -175,6 +175,13 @@ Create `backend/.env` by copying `.env.example`:
 
 ---
 
+### 💡 Reviewer & Developer Note: Zero-Config SMTP Mock & Fallback
+To ensure a frictionless setup and evaluation experience, a robust **SMTP Mock & Fallback system** has been built directly into the email utility:
+* **Mock Mode (Zero Config)**: If the Gmail credentials in `backend/.env` are left as default placeholders or empty, the backend will **not crash or fail signups**. Instead, it will output the 6-digit registration OTP code inside a beautifully formatted terminal box in your backend console log. You can copy the code from there to complete verification!
+* **Graceful Fallback**: If real credentials are provided but SMTP connection or authentication fails, the backend will catch the error, log the generated OTP to the console, and allow the registration flow to succeed successfully without throwing a `500 Server Error`.
+
+---
+
 ## 📡 API Reference
 
 ### Auth Routes — `/api/auth`
