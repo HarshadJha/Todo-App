@@ -21,7 +21,6 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
 
   const navLinks = [
     { label: 'Home', path: '/' },
-    { label: 'Contact', path: '/contact' },
   ];
 
   return (

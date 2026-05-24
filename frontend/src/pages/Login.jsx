@@ -133,14 +133,7 @@ const Login = () => {
             </button>
           </form>
 
-          <div className="mt-5 text-center">
-            <p className="text-sm text-gray-500 dark:text-gray-400">
-              Need to verify your email?{' '}
-              <Link to="/verify-otp" className="text-primary-600 hover:text-primary-700 font-medium">
-                Enter OTP
-              </Link>
-            </p>
-          </div>
+
         </div>
       </div>
     </div>
