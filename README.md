@@ -5,7 +5,7 @@
 
 ---
 
-### 🌐 Live Deployment Links - [https://todo-app-jet-two-17.vercel.app](https://todo-app-jet-two-17.vercel.app)
+### 🌐 Live Deployment Link - [https://todo-app-jet-two-17.vercel.app](https://todo-app-jet-two-17.vercel.app)
 ---
 
 ## 📋 Table of Contents
