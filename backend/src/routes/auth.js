@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const User = require('../models/User');
 const { protect } = require('../middleware/auth');
-const { sendOTPEmail } = require('../utils/sendEmail');
+const { sendOTPEmail, isMockEmailConfig } = require('../utils/sendEmail');
 
 /**
  * Generate a cryptographically secure 6-digit OTP
@@ -49,10 +49,13 @@ router.post('/register', async (req, res) => {
       existingUser.otpExpiry = new Date(Date.now() + 10 * 60 * 1000);
       existingUser.name = name;
       await existingUser.save();
+      const isMock = isMockEmailConfig();
       await sendOTPEmail(email, name, otp);
       return res.status(200).json({
         success: true,
-        message: 'OTP resent to your email. Please verify your account.',
+        message: isMock 
+          ? `DEMO MODE: OTP resent! Use code: ${otp}` 
+          : 'OTP resent to your email. Please verify your account.',
         email,
       });
     }
@@ -69,11 +72,14 @@ router.post('/register', async (req, res) => {
       isVerified: false,
     });
 
+    const isMock = isMockEmailConfig();
     await sendOTPEmail(email, name, otp);
 
     res.status(201).json({
       success: true,
-      message: 'Registration successful! Please check your email for the OTP.',
+      message: isMock 
+        ? `DEMO MODE: OTP sent! Use code: ${otp}` 
+        : 'Registration successful! Please check your email for the OTP.',
       email: user.email,
     });
   } catch (error) {
@@ -218,9 +224,15 @@ router.post('/resend-otp', async (req, res) => {
     user.otpExpiry = new Date(Date.now() + 10 * 60 * 1000);
     await user.save();
 
+    const isMock = isMockEmailConfig();
     await sendOTPEmail(email, user.name, otp);
 
-    res.status(200).json({ success: true, message: 'New OTP sent to your email.' });
+    res.status(200).json({ 
+      success: true, 
+      message: isMock 
+        ? `DEMO MODE: New OTP sent! Use code: ${otp}` 
+        : 'New OTP sent to your email.' 
+    });
   } catch (error) {
     console.error('Resend OTP error:', error);
     res.status(500).json({ success: false, message: 'Server error.' });

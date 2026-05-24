@@ -203,4 +203,4 @@ const sendContactConfirmationEmail = async (to, name, message) => {
   }
 };
 
-module.exports = { sendOTPEmail, sendContactConfirmationEmail };
+module.exports = { sendOTPEmail, sendContactConfirmationEmail, isMockEmailConfig };
